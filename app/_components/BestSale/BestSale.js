@@ -69,12 +69,12 @@ const BestSale = () => {
                       />
                     </div>
                     <div className="px-4">
-                      <h2 className="text-gray-800 text-[16px] md:text-[12px] lg:text-[12px] font-bold line-clamp-2">
+                      <h2 className="text-gray-800 text-[14px] md:text-[12px] lg:text-[12px] font-bold line-clamp-2">
                         {item?.title} {quantity}
                       </h2>
 
                       <div className="mt-3">
-                        <span className="text-gray-800 text-[24px] md:text-[16px] font-extrabold ">
+                        <span className="text-gray-800 text-[14px] md:text-[16px] font-extrabold ">
                           {price}
                         </span>
                       </div>
@@ -84,7 +84,7 @@ const BestSale = () => {
                           (item) => {
                             return (
                               <svg
-                                className="w-6 h-6  md:w-6 md:h-6 lg:h-4 lg:w-4 fill-current text-yellow-700"
+                                className="w-5 h-5  md:w-6 md:h-6 lg:h-4 lg:w-4 fill-current text-yellow-700"
                                 viewBox="0 0 24 24"
                               >
                                 <path d="M12 .587l3.668 7.568L24 9.423l-6 5.849L19.336 24 12 20.201 4.664 24 6 15.272 0 9.423l8.332-1.268z" />
@@ -164,7 +164,7 @@ const BestSale = () => {
               );
             })}
           </div> */}
-          <div className="w-full flex flex-col justify-between ">
+          {/* <div className="w-full flex flex-col justify-between ">
             {salesData?.slice(3, 6).map((item) => {
               // console.log(item);
               const temp =
@@ -216,8 +216,60 @@ const BestSale = () => {
                 </Link>
               );
             })}
+          </div> */}
+          <div className="w-full flex flex-col justify-between ">
+            {salesData?.slice(3, 6).map((item) => {
+              // console.log(item);
+              const temp =
+                item?.mapOfLinks?.[timeZoneCountry] ??
+                item?.mapOfLinks?.["US"] ??
+                (item?.mapOfLinks[Object.keys(item?.mapOfLinks)?.[0]] || []);
+              if (Object.keys(item?.mapOfLinks)?.length == 0) return null;
+              const { link, price, quantity } = temp;
+              // if (!item?.mapOfLinks[timeZoneCountry]) return;
+              // const { link, price, quantity } =
+              //   item?.mapOfLinks[timeZoneCountry];
+              return (
+                <Link href={link}>
+                  <div className=" flex bg-white shadow-lg rounded-lg overflow-hidden p-2">
+                    <div className="">
+                      <img
+                        className="min-h-32 max-h-32 min-w-32 md:w-32 lg:min-w-24 lg:max-w-24  max-w-32 object-cover"
+                        src={item?.banner}
+                        alt="Euphoria Eau De Parful"
+                      />
+                    </div>
+                    <div className="px-4">
+                      <h2 className="text-gray-800 text-[14px] md:text-[12px] lg:text-[12px] font-bold line-clamp-2">
+                        {item?.title} {quantity}
+                      </h2>
+
+                      <div className="mt-3">
+                        <span className="text-gray-800 text-[14px] md:text-[16px] font-extrabold ">
+                          {price}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center mt-2">
+                        {Array.from({ length: Number(item?.rating) })?.map(
+                          (item) => {
+                            return (
+                              <svg
+                                className="w-5 h-5  md:w-6 md:h-6 lg:h-4 lg:w-4 fill-current text-yellow-700"
+                                viewBox="0 0 24 24"
+                              >
+                                <path d="M12 .587l3.668 7.568L24 9.423l-6 5.849L19.336 24 12 20.201 4.664 24 6 15.272 0 9.423l8.332-1.268z" />
+                              </svg>
+                            );
+                          }
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
-          
 
           {/* OLD */}
           {/* <div className="w-full flex flex-col justify-between ">
